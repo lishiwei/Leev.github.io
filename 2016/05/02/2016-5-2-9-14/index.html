@@ -90,7 +90,7 @@
 <meta property="og:site_name" content="Lishiwei'Notes">
 <meta property="og:description" content="#android中static关键字的生命周期问题
   年前有次心血来潮跑去毫无准备的跑去平安面试。面试官看我的代码里面有很多static变量，便问我Android中的static生命周期的问题，当时理解是错误的，以为Activity或者Fragment里面的static变量的生命周期跟自己的生命周期相同。在这里说明一下，static是存储于dalvik虚拟机的方法区的，类加载的时候static变">
-<meta property="og:updated_time" content="2016-05-02T15:03:41.000Z">
+<meta property="og:updated_time" content="2016-05-02T15:05:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android中static关键字的生命周期问题">
 <meta name="twitter:description" content="#android中static关键字的生命周期问题
@@ -305,9 +305,8 @@
 <ul>
 <li><p>在activity中不能用static变量去引用自己，除非在生命周期ondestroy里面显示置null，不然会造成activity泄露。</p>
 </li>
-<li><p>不能在Application里面存储static变量，如果你的应用是后台进程，并且内存不足的时候Android会kill掉此应用，Application里面的static变量也会置null，此后内存不紧张的时候回尝试重启Application，但是Application里面的static变量已为null。</p>
-<pre><code>当你从任务栈或者桌面图标里再次进入这个Application，并且使用static变量的时候就会发生空指针异常了。
-</code></pre></li>
+<li><p>不能在Application里面存储static变量，如果你的应用是后台进程，并且内存不足的时候Android会kill掉此应用，Application里面的static变量也会置null，此后内存不紧张的时候回尝试重启Application，但是Application里面的static变量已为null。当你从任务栈或者桌面图标里再次进入这个Application，并且使用static变量的时候就会发生空指针异常了。</p>
+</li>
 </ul>
 
       
