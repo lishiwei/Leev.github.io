@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-05-01T11:13:30.000Z</updated>
+  <updated>2016-05-02T13:32:03.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2016-5-2-9-14</title>
+    <link href="http://yoursite.com/2016/05/02/2016-5-2-9-14/"/>
+    <id>http://yoursite.com/2016/05/02/2016-5-2-9-14/</id>
+    <published>2016-05-02T13:22:17.000Z</published>
+    <updated>2016-05-02T13:32:03.000Z</updated>
+    
+    <content type="html">&lt;p&gt;android 中 static关键字的生命周期问题&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;android 中 static关键字的生命周期问题&lt;/p&gt;
+
+    
+    </summary>
+    
+    
+      <category term="static" scheme="http://yoursite.com/tags/static/"/>
+    
+  </entry>
   
   <entry>
     <title></title>
