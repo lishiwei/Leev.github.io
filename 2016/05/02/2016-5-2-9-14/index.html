@@ -82,16 +82,19 @@
 
 
 
-<meta name="description" content="android 中 static关键字的生命周期问题">
+<meta name="description" content="#android中static关键字的生命周期问题
+  年前有次心血来潮跑去毫无准备的跑去平安面试。面试官看我的代码里面有很多static变量，便问我Android中的static生命周期的问题，当时理解是错误的，以为Activity或者Fragment里面的static变量的生命周期跟自己的生命周期相同。在这里说明一下，static是存储于dalvik虚拟机的方法区的，类加载的时候static变">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2016-5-2-9-14">
+<meta property="og:title" content="Android中static关键字的生命周期问题">
 <meta property="og:url" content="http://yoursite.com/2016/05/02/2016-5-2-9-14/index.html">
 <meta property="og:site_name" content="Lishiwei'Notes">
-<meta property="og:description" content="android 中 static关键字的生命周期问题">
-<meta property="og:updated_time" content="2016-05-02T13:32:03.000Z">
+<meta property="og:description" content="#android中static关键字的生命周期问题
+  年前有次心血来潮跑去毫无准备的跑去平安面试。面试官看我的代码里面有很多static变量，便问我Android中的static生命周期的问题，当时理解是错误的，以为Activity或者Fragment里面的static变量的生命周期跟自己的生命周期相同。在这里说明一下，static是存储于dalvik虚拟机的方法区的，类加载的时候static变">
+<meta property="og:updated_time" content="2016-05-02T14:59:16.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2016-5-2-9-14">
-<meta name="twitter:description" content="android 中 static关键字的生命周期问题">
+<meta name="twitter:title" content="Android中static关键字的生命周期问题">
+<meta name="twitter:description" content="#android中static关键字的生命周期问题
+  年前有次心血来潮跑去毫无准备的跑去平安面试。面试官看我的代码里面有很多static变量，便问我Android中的static生命周期的问题，当时理解是错误的，以为Activity或者Fragment里面的static变量的生命周期跟自己的生命周期相同。在这里说明一下，static是存储于dalvik虚拟机的方法区的，类加载的时候static变">
 
 
 
@@ -109,7 +112,7 @@
   };
 </script>
 
-  <title> 2016-5-2-9-14 | Lishiwei'Notes </title>
+  <title> Android中static关键字的生命周期问题 | Lishiwei'Notes </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -249,7 +252,7 @@
             
             
               
-                2016-5-2-9-14
+                Android中static关键字的生命周期问题
               
             
           </h1>
@@ -296,7 +299,16 @@
       
 
       
-        <p>android 中 static关键字的生命周期问题</p>
+        <p>#android中static关键字的生命周期问题</p>
+<p>  年前有次心血来潮跑去毫无准备的跑去平安面试。面试官看我的代码里面有很多static变量，便问我Android中的static生命周期的问题，当时理解是错误的，以为Activity或者Fragment里面的static变量的生命周期跟自己的生命周期相同。在这里说明一下，static是存储于dalvik虚拟机的方法区的，类加载的时候static变量加载进方法区，当整个应用进程被kill掉，static变量才会被置null。</p>
+<p>  <strong>由此</strong></p>
+<ul>
+<li><p>在activity中不能用static变量去引用自己，除非在生命周期ondestroy里面显示置null，不然会造成activity泄露。</p>
+</li>
+<li><p>不能在Application里面存储static变量，如果你的应用是后台进程，并且内存不足的时候Android会kill掉此应用，Application里面的static变量也会置null，此后内存不紧张的时候回尝试重启Application，但是Application里面的static变量已为null。</p>
+<pre><code>当你从任务栈或者桌面图标里再次进入这个Application，并且使用static变量的时候就会发生空指针异常了。
+</code></pre></li>
+</ul>
 
       
     </div>
@@ -380,7 +392,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/05/02/2016-5-2-9-14/"
-           data-title="2016-5-2-9-14" data-url="http://yoursite.com/2016/05/02/2016-5-2-9-14/">
+           data-title="Android中static关键字的生命周期问题" data-url="http://yoursite.com/2016/05/02/2016-5-2-9-14/">
       </div>
     
   </div>

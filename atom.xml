@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-05-02T13:32:03.000Z</updated>
+  <updated>2016-05-02T14:59:16.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,19 +16,28 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>2016-5-2-9-14</title>
+    <title>Android中static关键字的生命周期问题</title>
     <link href="http://yoursite.com/2016/05/02/2016-5-2-9-14/"/>
     <id>http://yoursite.com/2016/05/02/2016-5-2-9-14/</id>
     <published>2016-05-02T13:22:17.000Z</published>
-    <updated>2016-05-02T13:32:03.000Z</updated>
+    <updated>2016-05-02T14:59:16.000Z</updated>
     
-    <content type="html">&lt;p&gt;android 中 static关键字的生命周期问题&lt;/p&gt;
+    <content type="html">&lt;p&gt;#android中static关键字的生命周期问题&lt;/p&gt;
+&lt;p&gt;  年前有次心血来潮跑去毫无准备的跑去平安面试。面试官看我的代码里面有很多static变量，便问我Android中的static生命周期的问题，当时理解是错误的，以为Activity或者Fragment里面的static变量的生命周期跟自己的生命周期相同。在这里说明一下，static是存储于dalvik虚拟机的方法区的，类加载的时候static变量加载进方法区，当整个应用进程被kill掉，static变量才会被置null。&lt;/p&gt;
+&lt;p&gt;  &lt;strong&gt;由此&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;在activity中不能用static变量去引用自己，除非在生命周期ondestroy里面显示置null，不然会造成activity泄露。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;不能在Application里面存储static变量，如果你的应用是后台进程，并且内存不足的时候Android会kill掉此应用，Application里面的static变量也会置null，此后内存不紧张的时候回尝试重启Application，但是Application里面的static变量已为null。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;当你从任务栈或者桌面图标里再次进入这个Application，并且使用static变量的时候就会发生空指针异常了。
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </content>
     
     <summary type="html">
     
-      &lt;p&gt;android 中 static关键字的生命周期问题&lt;/p&gt;
-
+      &lt;p&gt;#android中static关键字的生命周期问题&lt;/p&gt;
+&lt;p&gt;  年前有次心血来潮跑去毫无准备的跑去平安面试。面试官看我的代码里面有很多static变量，便问我Android中的static生命周期的问题，当时理解是错误的，以为Activity或者Fragment里面的
     
     </summary>
     
