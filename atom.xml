@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-05-13T12:47:39.000Z</updated>
+  <updated>2016-05-13T12:50:59.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2016/05/13/2016-5-13/"/>
     <id>http://yoursite.com/2016/05/13/2016-5-13/</id>
     <published>2016-05-13T11:03:02.000Z</published>
-    <updated>2016-05-13T12:47:39.000Z</updated>
+    <updated>2016-05-13T12:50:59.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;java内存模型&quot;&gt;&lt;a href=&quot;#java内存模型&quot; class=&quot;headerlink&quot; title=&quot;java内存模型&quot;&gt;&lt;/a&gt;java内存模型&lt;/h1&gt;&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;p&gt;  最近两天关注了java和Android的内存模型和垃圾回收机制，先整理如下。本篇文章是从很多篇文章中摘抄的，会在后面有个统一的转载地址的。&lt;/p&gt;
 &lt;p&gt;大家都知道Android应用层是由java开发的，Android的dalvik虚拟机与jvm类似，不过他是基于寄存器的，速度会更快。因此在了解Android的内存管理机制之前需要先了解下java的内存分配和垃圾回收机制。&lt;br&gt;在java中通过new 关键字来为对象分配内存，而内存是由GC来回收的。因此java工程师就不用去手动管理内存了。但是这样有可能在不知不觉中就会浪费了很多内存，最终导致java虚拟机花费很多时间去进行垃圾回收，更严重的是造成JVM的OOM。因此，java工程师有必要去了解java的内存分配和垃圾回收机制。&lt;/p&gt;
@@ -36,7 +36,7 @@
 &lt;li&gt;本地方法栈（非线程共享）&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;以上文章摘抄自&lt;a href=&quot;http://blog.csdn.net/xieqibao/article/details/6707519&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;csdn 舍我其谁的专栏&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;接下来我们重点关注下-Heap-区&quot;&gt;&lt;a href=&quot;#接下来我们重点关注下-Heap-区&quot; class=&quot;headerlink&quot; title=&quot;接下来我们重点关注下 Heap 区&quot;&gt;&lt;/a&gt;接下来我们重点关注下 &lt;strong&gt;Heap&lt;/strong&gt; 区&lt;/h2&gt;&lt;p&gt;　　Java 中的堆是 JVM 所管理的最大的一块内存空间，主要用于存放各种类的实例对象。 &lt;/p&gt;
+&lt;h2 id=&quot;Heap区&quot;&gt;&lt;a href=&quot;#Heap区&quot; class=&quot;headerlink&quot; title=&quot;Heap区&quot;&gt;&lt;/a&gt;Heap区&lt;/h2&gt;&lt;p&gt;　　Java 中的堆是 JVM 所管理的最大的一块内存空间，主要用于存放各种类的实例对象。 &lt;/p&gt;
 &lt;p&gt;  在 Java 中，堆被划分成两个不同的区域：新生代 ( Young )、老年代 ( Old )。新生代 ( Young ) 又被划分为三个区域：Eden、From Survivor、To Survivor。 &lt;/p&gt;
 &lt;p&gt;  这样划分的目的是为了使 JVM 能够更好的管理堆内存中的对象，包括内存的分配以及回收。&lt;br&gt;　　堆的内存模型大致为：&lt;br&gt;  &lt;br&gt;   &lt;img src=&quot;http://img.blog.csdn.net/20160229115517775&quot; alt=&quot;&quot;&gt;&lt;br&gt;  &lt;br&gt;　　新生代：Young Generation，主要用来存放新生的对象。&lt;/p&gt;
 &lt;p&gt;　　老年代：Old Generation或者称作Tenured Generation，主要存放应用程序声明周期长的内存对象。&lt;/p&gt;
@@ -46,12 +46,12 @@
 &lt;p&gt;　　默认的，Edem : from : to = 8 : 1 : 1 ( 可以通过参数 –XX:SurvivorRatio 来设定 )，即： Eden = 8/10 的新生代空间大小，from = to = 1/10 的新生代空间大小。&lt;br&gt;JVM 每次只会使用 Eden 和其中的一块 Survivor 区域来为对象服务，所以无论什么时候，总是有一块 Survivor 区域是空闲着的。&lt;br&gt;因此，新生代实际可用的内存空间为 9/10 ( 即90% )的新生代空间。&lt;/p&gt;
 &lt;h1 id=&quot;Gc&quot;&gt;&lt;a href=&quot;#Gc&quot; class=&quot;headerlink&quot; title=&quot;Gc&quot;&gt;&lt;/a&gt;Gc&lt;/h1&gt;&lt;p&gt;常见的垃圾回收算法有引用计数法（Reference Counting）、标注并清理（Mark and Sweep GC）、拷贝（Copying GC）和逐代回收（Generational GC）等算法，&lt;br&gt;关于这四种GC算法，详解请看此篇&lt;a href=&quot;http://www.cnblogs.com/killmyday/archive/2013/06/12/3132518.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;java内存垃圾回收算法&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;下文中 Minor GC 代表拷贝（Copying GC）算法 。Full GC 或者 Major GC代表 标记并清理算法（Mark and Sweep GC）&lt;/p&gt;
-&lt;p&gt;新生代几乎是所有 Java 对象出生的地方，即 Java 对象申请的内存以及存放都是在这个地方。Java 中的大部分对象通常不需长久存活，具有朝生夕灭的性质。&lt;/p&gt;
+&lt;h2 id=&quot;Young区&quot;&gt;&lt;a href=&quot;#Young区&quot; class=&quot;headerlink&quot; title=&quot;Young区&quot;&gt;&lt;/a&gt;Young区&lt;/h2&gt;&lt;p&gt;新生代几乎是所有 Java 对象出生的地方，即 Java 对象申请的内存以及存放都是在这个地方。Java 中的大部分对象通常不需长久存活，具有朝生夕灭的性质。&lt;/p&gt;
 &lt;p&gt;当一个对象被判定为 “死亡” 的时候，GC 就有责任来回收掉这部分对象的内存空间。新生代是 GC 收集垃圾的频繁区域。&lt;/p&gt;
 &lt;p&gt;当对象在 Eden ( 包括一个 Survivor 区域，这里假设是 from 区域 ) 出生后，在经过一次 Minor GC 后，如果对象还存活，并且能够被另外一块 Survivor 区域所容纳( 上面已经假设为 from 区域，这里应为 to 区域，即 to 区域有足够的内存空间来存储 Eden 和 from 区域中存活的对象 )，则使用复制算法将这些仍然还存活的对象复制到另外一块 Survivor 区域 ( 即 to 区域 ) 中，然后清理所使用过的 Eden 以及 Survivor 区域 ( 即 from 区域 )，并且将这些对象的年龄设置为1，以后对象在 Survivor 区每熬过一次 Minor GC，就将对象的年龄 + 1，当对象的年龄达到某个值时 ( 默认是 15 岁，可以通过参数 -XX:MaxTenuringThreshold 来设定 )，这些对象就会成为老年代。&lt;/p&gt;
 &lt;p&gt;但这也不是一定的，对于一些较大的对象 ( 即需要分配一块较大的连续内存空间 ) 则是直接进入到老年代。虚拟机提供了一个-XX:PretenureSizeThreshold参数，令大于这个设置值的对象直接在老年代分配。这样做的目的是避免在Eden区及两个Survivor区之间发生大量的内存复制（新生代采用复制算法收集内存）。&lt;/p&gt;
 &lt;p&gt;为了能够更好的适应不同的程序的内存状况，虚拟机并不是永远地要求对象的年龄必须达到了MaxTenuringThreshold才能晋升老年代，如果在Survivor空间中相同年龄所有对象大小的总和大于Survivor空间的一半，年龄大于或等于该年龄的对象可以直接进入老年代，无需等到MaxTenuringThreshold中要求的年龄。 &lt;/p&gt;
-&lt;p&gt;Full GC 是发生在老年代的垃圾收集动作，所采用的是“标记-清除”或者“标记-整理”算法。 &lt;/p&gt;
+&lt;h2 id=&quot;Old区&quot;&gt;&lt;a href=&quot;#Old区&quot; class=&quot;headerlink&quot; title=&quot;Old区&quot;&gt;&lt;/a&gt;Old区&lt;/h2&gt;&lt;p&gt;Full GC 是发生在老年代的垃圾收集动作，所采用的是“标记-清除”或者“标记-整理”算法。 &lt;/p&gt;
 &lt;p&gt;现实的生活中，老年代的人通常会比新生代的人 “早死”。堆内存中的老年代(Old)不同于这个，老年代里面的对象几乎个个都是在 Survivor 区域中熬过来的，它们是不会那么容易就 “死掉” 了的。因此，Full GC 发生的次数不会有 Minor GC 那么频繁，并且做一次 Full GC 要比进行一次 Minor GC 的时间更长。&lt;/p&gt;
 &lt;p&gt;在发生MinorGC之前，虚拟机会先检查老年代最大可用的连续空间是否大于新生代所有对象总空间，如果这个条件成立，那么MinorGC可以确保是安全的。如果不成立，则虚拟机会查看HandlePromotionFailure设置值是否允许担保失败。如果允许，那么会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，如果大于，将尝试这进行一次MinorGC，尽管这次MinorGC是有风险的；如果小于，或者HandlePromptionFailure设置不允许冒险，那这是也要改为进行一次FullGC. &lt;/p&gt;
 &lt;p&gt;另外，标记-清除算法收集垃圾的时候会产生许多的内存碎片 ( 即不连续的内存空间 )，此后需要为较大的对象分配内存空间时，若无法找到足够的连续的内存空间，就会提前触发一次 GC 的收集动作。&lt;br&gt;以上文章摘抄自 csdn 朱小厮的文章 &lt;a href=&quot;http://www.cnblogs.com/killmyday/archive/2013/06/12/3132518.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cnblogs.com/killmyday/archive/2013/06/12/3132518.html&lt;/a&gt;&lt;/p&gt;
