@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="java内存模型垃圾回收," />
 
 
 
@@ -82,19 +82,25 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="description" content="#java内存模型
+##概述  最近两天关注了java和Android的内存模型和垃圾回收机制，先整理如下。本篇文章是从很多篇文章中摘抄的，会在后面有个统一的转载地址的。
+大家都知道Android应用层是由java开发的，Android的dalvik虚拟机与jvm类似，不过他是基于寄存器的，速度会更快。因此在了解Android的内存管理机制之前需要先了解下java的内存分配和垃圾回收机制。在jav">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2016/05/01/hello-world/index.html">
+<meta property="og:title" content="java 内存模型和垃圾回收机制">
+<meta property="og:url" content="http://yoursite.com/2016/05/13/2016-5-13/index.html">
 <meta property="og:site_name" content="Lishiwei'Notes">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2016-05-02T15:08:42.000Z">
+<meta property="og:description" content="#java内存模型
+##概述  最近两天关注了java和Android的内存模型和垃圾回收机制，先整理如下。本篇文章是从很多篇文章中摘抄的，会在后面有个统一的转载地址的。
+大家都知道Android应用层是由java开发的，Android的dalvik虚拟机与jvm类似，不过他是基于寄存器的，速度会更快。因此在了解Android的内存管理机制之前需要先了解下java的内存分配和垃圾回收机制。在jav">
+<meta property="og:image" content="http://hi.csdn.net/attachment/201108/22/0_13139780444m7y.gif">
+<meta property="og:image" content="http://img.blog.csdn.net/20160229115517775">
+<meta property="og:updated_time" content="2016-05-13T12:19:49.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="java 内存模型和垃圾回收机制">
+<meta name="twitter:description" content="#java内存模型
+##概述  最近两天关注了java和Android的内存模型和垃圾回收机制，先整理如下。本篇文章是从很多篇文章中摘抄的，会在后面有个统一的转载地址的。
+大家都知道Android应用层是由java开发的，Android的dalvik虚拟机与jvm类似，不过他是基于寄存器的，速度会更快。因此在了解Android的内存管理机制之前需要先了解下java的内存分配和垃圾回收机制。在jav">
+<meta name="twitter:image" content="http://hi.csdn.net/attachment/201108/22/0_13139780444m7y.gif">
 
 
 
@@ -112,7 +118,7 @@ Quick">
   };
 </script>
 
-  <title> Hello World | Lishiwei'Notes </title>
+  <title> java 内存模型和垃圾回收机制 | Lishiwei'Notes </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -252,7 +258,7 @@ Quick">
             
             
               
-                Hello World
+                java 内存模型和垃圾回收机制
               
             
           </h1>
@@ -264,38 +270,19 @@ Quick">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-01T18:37:59+08:00" content="2016-05-01">
-              2016-05-01
+            <time itemprop="dateCreated" datetime="2016-05-13T19:03:02+08:00" content="2016-05-13">
+              2016-05-13
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/01/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/01/hello-world/" itemprop="commentsCount"></span>
+                <a href="/2016/05/13/2016-5-13/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/13/2016-5-13/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -318,15 +305,46 @@ Quick">
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p>#java内存模型</p>
+<p>##概述<br>  最近两天关注了java和Android的内存模型和垃圾回收机制，先整理如下。本篇文章是从很多篇文章中摘抄的，会在后面有个统一的转载地址的。</p>
+<p>大家都知道Android应用层是由java开发的，Android的dalvik虚拟机与jvm类似，不过他是基于寄存器的，速度会更快。因此在了解Android的内存管理机制之前需要先了解下java的内存分配和垃圾回收机制。<br>在java中通过new 关键字来为对象分配内存，而内存是由GC来回收的。因此java工程师就不用去手动管理内存了。但是这样有可能在不知不觉中就会浪费了很多内存，最终导致java虚拟机花费很多时间去进行垃圾回收，更严重的是造成JVM的OOM。因此，java工程师有必要去了解java的内存分配和垃圾回收机制。</p>
+<ol>
+<li>内存结构图<br><img src="http://hi.csdn.net/attachment/201108/22/0_13139780444m7y.gif" alt="java 内存结构图"></li>
+</ol>
+<p>上面这张图是JVM的结构图，它主要四个部分组成：Class Loader子系统和执行引擎，运行时方法区和本地方法区，我们主要来看下RUNTIME DATA AREA区，也就是我们常说的JVM内存。从图中可以看出，RUNTIMEDATA AREA区主要由5个部分组成：</p>
+<ol>
+<li>Method Area:被装载的class的元信息存储在Method Area中，它是线程共享的</li>
+<li>Heap(堆)：一个java虚拟机实例中只存在一个堆空间，存放一些对象信 息，它是线程共享的</li>
+<li>Java栈： java虚拟机直接对java栈进行两种操作，以帧为单位的压栈和出栈（非线程共享）</li>
+<li>程序计数器（非线程共享）</li>
+<li>本地方法栈（非线程共享）</li>
+</ol>
+<p>以上文章摘抄自<a href="http://blog.csdn.net/xieqibao/article/details/6707519" target="_blank" rel="external">csdn 舍我其谁的专栏</a></p>
+<p>####接下来我们重点关注下 <strong>Heap</strong> 区<br>　　Java 中的堆是 JVM 所管理的最大的一块内存空间，主要用于存放各种类的实例对象。 </p>
+<p>  在 Java 中，堆被划分成两个不同的区域：新生代 ( Young )、老年代 ( Old )。新生代 ( Young ) 又被划分为三个区域：Eden、From Survivor、To Survivor。 </p>
+<p>  这样划分的目的是为了使 JVM 能够更好的管理堆内存中的对象，包括内存的分配以及回收。<br>　　堆的内存模型大致为：<br>  <br>   <img src="http://img.blog.csdn.net/20160229115517775" alt=""><br>  <br>新生代：Young Generation，主要用来存放新生的对象。</p>
+<p>　　老年代：Old Generation或者称作Tenured Generation，主要存放应用程序声明周期长的内存对象。</p>
+<p>　　永久代：（方法区，不属于java堆，另一个别名为“非堆Non-Heap”但是一般查看PrintGCDetails都会带上PermGen区）是指内存的永久保存区域，主要存放Class和Meta的信息,Class在被 Load的时候被放入PermGen space区域. 它和和存放Instance的Heap区域不同,GC(Garbage Collection)不会在主程序运行期对PermGen space进行清理，所以如果你的应用会加载很多Class的话,就很可能出现PermGen space错误。</p>
+<p>　　堆大小 = 新生代 + 老年代。其中，堆的大小可以通过参数 –Xms、-Xmx 来指定。</p>
+<p>　　默认的，新生代 ( Young ) 与老年代 ( Old ) 的比例的值为 1:2 ( 该值可以通过参数 –XX:NewRatio 来指定 )，即：新生代 ( Young ) = 1/3 的堆空间大小。老年代 ( Old ) = 2/3 的堆空间大小。其中，新生代 ( Young ) 被细分为 Eden 和 两个 Survivor 区域，这两个 Survivor 区域分别被命名为 from 和 to，以示区分。</p>
+<p>　　默认的，Edem : from : to = 8 : 1 : 1 ( 可以通过参数 –XX:SurvivorRatio 来设定 )，即： Eden = 8/10 的新生代空间大小，from = to = 1/10 的新生代空间大小。<br>JVM 每次只会使用 Eden 和其中的一块 Survivor 区域来为对象服务，所以无论什么时候，总是有一块 Survivor 区域是空闲着的。<br>因此，新生代实际可用的内存空间为 9/10 ( 即90% )的新生代空间。</p>
+<p>#Gc<br>常见的垃圾回收算法有引用计数法（Reference Counting）、标注并清理（Mark and Sweep GC）、拷贝（Copying GC）和逐代回收（Generational GC）等算法，<br>关于这四种GC算法，详解请看此篇<a href="http://www.cnblogs.com/killmyday/archive/2013/06/12/3132518.html" target="_blank" rel="external">java内存垃圾回收算法</a></p>
+<p>下文中 Minor GC 代表拷贝（Copying GC）算法 。Full GC 或者 Major GC代表 标记并清理算法（Mark and Sweep GC）</p>
+<p>新生代几乎是所有 Java 对象出生的地方，即 Java 对象申请的内存以及存放都是在这个地方。Java 中的大部分对象通常不需长久存活，具有朝生夕灭的性质。</p>
+<p>当一个对象被判定为 “死亡” 的时候，GC 就有责任来回收掉这部分对象的内存空间。新生代是 GC 收集垃圾的频繁区域。</p>
+<p>当对象在 Eden ( 包括一个 Survivor 区域，这里假设是 from 区域 ) 出生后，在经过一次 Minor GC 后，如果对象还存活，并且能够被另外一块 Survivor 区域所容纳( 上面已经假设为 from 区域，这里应为 to 区域，即 to 区域有足够的内存空间来存储 Eden 和 from 区域中存活的对象 )，则使用复制算法将这些仍然还存活的对象复制到另外一块 Survivor 区域 ( 即 to 区域 ) 中，然后清理所使用过的 Eden 以及 Survivor 区域 ( 即 from 区域 )，并且将这些对象的年龄设置为1，以后对象在 Survivor 区每熬过一次 Minor GC，就将对象的年龄 + 1，当对象的年龄达到某个值时 ( 默认是 15 岁，可以通过参数 -XX:MaxTenuringThreshold 来设定 )，这些对象就会成为老年代。</p>
+<p>但这也不是一定的，对于一些较大的对象 ( 即需要分配一块较大的连续内存空间 ) 则是直接进入到老年代。虚拟机提供了一个-XX:PretenureSizeThreshold参数，令大于这个设置值的对象直接在老年代分配。这样做的目的是避免在Eden区及两个Survivor区之间发生大量的内存复制（新生代采用复制算法收集内存）。</p>
+<p>为了能够更好的适应不同的程序的内存状况，虚拟机并不是永远地要求对象的年龄必须达到了MaxTenuringThreshold才能晋升老年代，如果在Survivor空间中相同年龄所有对象大小的总和大于Survivor空间的一半，年龄大于或等于该年龄的对象可以直接进入老年代，无需等到MaxTenuringThreshold中要求的年龄。 </p>
+<p>Full GC 是发生在老年代的垃圾收集动作，所采用的是“标记-清除”或者“标记-整理”算法。 </p>
+<p>现实的生活中，老年代的人通常会比新生代的人 “早死”。堆内存中的老年代(Old)不同于这个，老年代里面的对象几乎个个都是在 Survivor 区域中熬过来的，它们是不会那么容易就 “死掉” 了的。因此，Full GC 发生的次数不会有 Minor GC 那么频繁，并且做一次 Full GC 要比进行一次 Minor GC 的时间更长。</p>
+<p>在发生MinorGC之前，虚拟机会先检查老年代最大可用的连续空间是否大于新生代所有对象总空间，如果这个条件成立，那么MinorGC可以确保是安全的。如果不成立，则虚拟机会查看HandlePromotionFailure设置值是否允许担保失败。如果允许，那么会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，如果大于，将尝试这进行一次MinorGC，尽管这次MinorGC是有风险的；如果小于，或者HandlePromptionFailure设置不允许冒险，那这是也要改为进行一次FullGC. </p>
+<p>另外，标记-清除算法收集垃圾的时候会产生许多的内存碎片 ( 即不连续的内存空间 )，此后需要为较大的对象分配内存空间时，若无法找到足够的连续的内存空间，就会提前触发一次 GC 的收集动作。</p>
+<p>文中文章的链接：</p>
+<ol>
+<li>csdn 舍我其谁的文章 <a href="http://blog.csdn.net/xieqibao/article/details/6707519" target="_blank" rel="external">http://blog.csdn.net/xieqibao/article/details/6707519</a></li>
+<li>博客园 killmyday的文章 <a href="http://www.cnblogs.com/killmyday/archive/2013/06/12/3132518.html" target="_blank" rel="external">http://www.cnblogs.com/killmyday/archive/2013/06/12/3132518.html</a></li>
+<li>csdn 朱小厮的文章 <a href="http://www.cnblogs.com/killmyday/archive/2013/06/12/3132518.html" target="_blank" rel="external">http://www.cnblogs.com/killmyday/archive/2013/06/12/3132518.html</a></li>
+</ol>
 
       
     </div>
@@ -366,18 +384,24 @@ Quick">
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/java内存模型垃圾回收/" rel="tag">#java内存模型垃圾回收</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/05/02/2016-5-2-9-14/" rel="next" title="Android中static关键字的生命周期问题">
+                <i class="fa fa-chevron-left"></i> Android中static关键字的生命周期问题
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/01/postname/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -403,8 +427,8 @@ Quick">
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/01/hello-world/"
-           data-title="Hello World" data-url="http://yoursite.com/2016/05/01/hello-world/">
+      <div class="ds-thread" data-thread-key="2016/05/13/2016-5-13/"
+           data-title="java 内存模型和垃圾回收机制" data-url="http://yoursite.com/2016/05/13/2016-5-13/">
       </div>
     
   </div>
@@ -540,7 +564,7 @@ Quick">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>
