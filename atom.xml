@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-05-13T12:37:03.000Z</updated>
+  <updated>2016-05-13T12:44:42.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2016/05/13/2016-5-13/"/>
     <id>http://yoursite.com/2016/05/13/2016-5-13/</id>
     <published>2016-05-13T11:03:02.000Z</published>
-    <updated>2016-05-13T12:37:03.000Z</updated>
+    <updated>2016-05-13T12:44:42.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;java内存模型&quot;&gt;&lt;a href=&quot;#java内存模型&quot; class=&quot;headerlink&quot; title=&quot;java内存模型&quot;&gt;&lt;/a&gt;java内存模型&lt;/h1&gt;&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;p&gt;  最近两天关注了java和Android的内存模型和垃圾回收机制，先整理如下。本篇文章是从很多篇文章中摘抄的，会在后面有个统一的转载地址的。&lt;/p&gt;
 &lt;p&gt;大家都知道Android应用层是由java开发的，Android的dalvik虚拟机与jvm类似，不过他是基于寄存器的，速度会更快。因此在了解Android的内存管理机制之前需要先了解下java的内存分配和垃圾回收机制。&lt;br&gt;在java中通过new 关键字来为对象分配内存，而内存是由GC来回收的。因此java工程师就不用去手动管理内存了。但是这样有可能在不知不觉中就会浪费了很多内存，最终导致java虚拟机花费很多时间去进行垃圾回收，更严重的是造成JVM的OOM。因此，java工程师有必要去了解java的内存分配和垃圾回收机制。&lt;/p&gt;
@@ -54,7 +54,7 @@
 &lt;p&gt;Full GC 是发生在老年代的垃圾收集动作，所采用的是“标记-清除”或者“标记-整理”算法。 &lt;/p&gt;
 &lt;p&gt;现实的生活中，老年代的人通常会比新生代的人 “早死”。堆内存中的老年代(Old)不同于这个，老年代里面的对象几乎个个都是在 Survivor 区域中熬过来的，它们是不会那么容易就 “死掉” 了的。因此，Full GC 发生的次数不会有 Minor GC 那么频繁，并且做一次 Full GC 要比进行一次 Minor GC 的时间更长。&lt;/p&gt;
 &lt;p&gt;在发生MinorGC之前，虚拟机会先检查老年代最大可用的连续空间是否大于新生代所有对象总空间，如果这个条件成立，那么MinorGC可以确保是安全的。如果不成立，则虚拟机会查看HandlePromotionFailure设置值是否允许担保失败。如果允许，那么会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，如果大于，将尝试这进行一次MinorGC，尽管这次MinorGC是有风险的；如果小于，或者HandlePromptionFailure设置不允许冒险，那这是也要改为进行一次FullGC. &lt;/p&gt;
-&lt;p&gt;另外，标记-清除算法收集垃圾的时候会产生许多的内存碎片 ( 即不连续的内存空间 )，此后需要为较大的对象分配内存空间时，若无法找到足够的连续的内存空间，就会提前触发一次 GC 的收集动作。&lt;/p&gt;
+&lt;p&gt;另外，标记-清除算法收集垃圾的时候会产生许多的内存碎片 ( 即不连续的内存空间 )，此后需要为较大的对象分配内存空间时，若无法找到足够的连续的内存空间，就会提前触发一次 GC 的收集动作。&lt;br&gt;以上文章摘抄自 csdn 朱小厮的文章 &lt;a href=&quot;http://www.cnblogs.com/killmyday/archive/2013/06/12/3132518.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cnblogs.com/killmyday/archive/2013/06/12/3132518.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;文中文章的链接：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;csdn 舍我其谁的文章 &lt;a href=&quot;http://blog.csdn.net/xieqibao/article/details/6707519&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/xieqibao/article/details/6707519&lt;/a&gt;&lt;/li&gt;
