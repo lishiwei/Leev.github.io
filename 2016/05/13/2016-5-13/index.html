@@ -92,7 +92,7 @@
 大家都知道Android应用层是由java开发的，Android的dalvik虚拟机与jvm类似，不过他是基于寄存器的，速度会更快。因此在了解Android的内存管理机制之前需要先了解下java的内存分配和垃圾回收机制。在java中通过">
 <meta property="og:image" content="http://hi.csdn.net/attachment/201108/22/0_13139780444m7y.gif">
 <meta property="og:image" content="http://img.blog.csdn.net/20160229115517775">
-<meta property="og:updated_time" content="2016-05-13T12:35:28.000Z">
+<meta property="og:updated_time" content="2016-05-13T12:37:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java 内存模型和垃圾回收机制">
 <meta name="twitter:description" content="java内存模型概述  最近两天关注了java和Android的内存模型和垃圾回收机制，先整理如下。本篇文章是从很多篇文章中摘抄的，会在后面有个统一的转载地址的。
@@ -318,7 +318,7 @@
 <p>以上文章摘抄自<a href="http://blog.csdn.net/xieqibao/article/details/6707519" target="_blank" rel="external">csdn 舍我其谁的专栏</a></p>
 <h4 id="接下来我们重点关注下-Heap-区"><a href="#接下来我们重点关注下-Heap-区" class="headerlink" title="接下来我们重点关注下 Heap 区"></a>接下来我们重点关注下 <strong>Heap</strong> 区</h4><p>　　Java 中的堆是 JVM 所管理的最大的一块内存空间，主要用于存放各种类的实例对象。 </p>
 <p>  在 Java 中，堆被划分成两个不同的区域：新生代 ( Young )、老年代 ( Old )。新生代 ( Young ) 又被划分为三个区域：Eden、From Survivor、To Survivor。 </p>
-<p>  这样划分的目的是为了使 JVM 能够更好的管理堆内存中的对象，包括内存的分配以及回收。<br>　　堆的内存模型大致为：<br>  <br>   <img src="http://img.blog.csdn.net/20160229115517775" alt=""><br>  <br>   　　新生代：Young Generation，主要用来存放新生的对象。</p>
+<p>  这样划分的目的是为了使 JVM 能够更好的管理堆内存中的对象，包括内存的分配以及回收。<br>　　堆的内存模型大致为：<br>  <br>   <img src="http://img.blog.csdn.net/20160229115517775" alt=""><br>  <br>　　新生代：Young Generation，主要用来存放新生的对象。</p>
 <p>　　老年代：Old Generation或者称作Tenured Generation，主要存放应用程序声明周期长的内存对象。</p>
 <p>　　永久代：（方法区，不属于java堆，另一个别名为“非堆Non-Heap”但是一般查看PrintGCDetails都会带上PermGen区）是指内存的永久保存区域，主要存放Class和Meta的信息,Class在被 Load的时候被放入PermGen space区域. 它和和存放Instance的Heap区域不同,GC(Garbage Collection)不会在主程序运行期对PermGen space进行清理，所以如果你的应用会加载很多Class的话,就很可能出现PermGen space错误。</p>
 <p>　　堆大小 = 新生代 + 老年代。其中，堆的大小可以通过参数 –Xms、-Xmx 来指定。</p>
