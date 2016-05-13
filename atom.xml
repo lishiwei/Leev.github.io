@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-05-13T12:19:49.000Z</updated>
+  <updated>2016-05-13T12:35:28.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,10 +20,9 @@
     <link href="http://yoursite.com/2016/05/13/2016-5-13/"/>
     <id>http://yoursite.com/2016/05/13/2016-5-13/</id>
     <published>2016-05-13T11:03:02.000Z</published>
-    <updated>2016-05-13T12:19:49.000Z</updated>
+    <updated>2016-05-13T12:35:28.000Z</updated>
     
-    <content type="html">&lt;p&gt;#java内存模型&lt;/p&gt;
-&lt;p&gt;##概述&lt;br&gt;  最近两天关注了java和Android的内存模型和垃圾回收机制，先整理如下。本篇文章是从很多篇文章中摘抄的，会在后面有个统一的转载地址的。&lt;/p&gt;
+    <content type="html">&lt;h1 id=&quot;java内存模型&quot;&gt;&lt;a href=&quot;#java内存模型&quot; class=&quot;headerlink&quot; title=&quot;java内存模型&quot;&gt;&lt;/a&gt;java内存模型&lt;/h1&gt;&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;p&gt;  最近两天关注了java和Android的内存模型和垃圾回收机制，先整理如下。本篇文章是从很多篇文章中摘抄的，会在后面有个统一的转载地址的。&lt;/p&gt;
 &lt;p&gt;大家都知道Android应用层是由java开发的，Android的dalvik虚拟机与jvm类似，不过他是基于寄存器的，速度会更快。因此在了解Android的内存管理机制之前需要先了解下java的内存分配和垃圾回收机制。&lt;br&gt;在java中通过new 关键字来为对象分配内存，而内存是由GC来回收的。因此java工程师就不用去手动管理内存了。但是这样有可能在不知不觉中就会浪费了很多内存，最终导致java虚拟机花费很多时间去进行垃圾回收，更严重的是造成JVM的OOM。因此，java工程师有必要去了解java的内存分配和垃圾回收机制。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;内存结构图&lt;br&gt;&lt;img src=&quot;http://hi.csdn.net/attachment/201108/22/0_13139780444m7y.gif&quot; alt=&quot;java 内存结构图&quot;&gt;&lt;/li&gt;
@@ -37,15 +36,15 @@
 &lt;li&gt;本地方法栈（非线程共享）&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;以上文章摘抄自&lt;a href=&quot;http://blog.csdn.net/xieqibao/article/details/6707519&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;csdn 舍我其谁的专栏&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;####接下来我们重点关注下 &lt;strong&gt;Heap&lt;/strong&gt; 区&lt;br&gt;　　Java 中的堆是 JVM 所管理的最大的一块内存空间，主要用于存放各种类的实例对象。 &lt;/p&gt;
+&lt;h4 id=&quot;接下来我们重点关注下-Heap-区&quot;&gt;&lt;a href=&quot;#接下来我们重点关注下-Heap-区&quot; class=&quot;headerlink&quot; title=&quot;接下来我们重点关注下 Heap 区&quot;&gt;&lt;/a&gt;接下来我们重点关注下 &lt;strong&gt;Heap&lt;/strong&gt; 区&lt;/h4&gt;&lt;p&gt;　　Java 中的堆是 JVM 所管理的最大的一块内存空间，主要用于存放各种类的实例对象。 &lt;/p&gt;
 &lt;p&gt;  在 Java 中，堆被划分成两个不同的区域：新生代 ( Young )、老年代 ( Old )。新生代 ( Young ) 又被划分为三个区域：Eden、From Survivor、To Survivor。 &lt;/p&gt;
-&lt;p&gt;  这样划分的目的是为了使 JVM 能够更好的管理堆内存中的对象，包括内存的分配以及回收。&lt;br&gt;　　堆的内存模型大致为：&lt;br&gt;  &lt;br&gt;   &lt;img src=&quot;http://img.blog.csdn.net/20160229115517775&quot; alt=&quot;&quot;&gt;&lt;br&gt;  &lt;br&gt;新生代：Young Generation，主要用来存放新生的对象。&lt;/p&gt;
+&lt;p&gt;  这样划分的目的是为了使 JVM 能够更好的管理堆内存中的对象，包括内存的分配以及回收。&lt;br&gt;　　堆的内存模型大致为：&lt;br&gt;  &lt;br&gt;   &lt;img src=&quot;http://img.blog.csdn.net/20160229115517775&quot; alt=&quot;&quot;&gt;&lt;br&gt;  &lt;br&gt;   　　新生代：Young Generation，主要用来存放新生的对象。&lt;/p&gt;
 &lt;p&gt;　　老年代：Old Generation或者称作Tenured Generation，主要存放应用程序声明周期长的内存对象。&lt;/p&gt;
 &lt;p&gt;　　永久代：（方法区，不属于java堆，另一个别名为“非堆Non-Heap”但是一般查看PrintGCDetails都会带上PermGen区）是指内存的永久保存区域，主要存放Class和Meta的信息,Class在被 Load的时候被放入PermGen space区域. 它和和存放Instance的Heap区域不同,GC(Garbage Collection)不会在主程序运行期对PermGen space进行清理，所以如果你的应用会加载很多Class的话,就很可能出现PermGen space错误。&lt;/p&gt;
 &lt;p&gt;　　堆大小 = 新生代 + 老年代。其中，堆的大小可以通过参数 –Xms、-Xmx 来指定。&lt;/p&gt;
 &lt;p&gt;　　默认的，新生代 ( Young ) 与老年代 ( Old ) 的比例的值为 1:2 ( 该值可以通过参数 –XX:NewRatio 来指定 )，即：新生代 ( Young ) = 1/3 的堆空间大小。老年代 ( Old ) = 2/3 的堆空间大小。其中，新生代 ( Young ) 被细分为 Eden 和 两个 Survivor 区域，这两个 Survivor 区域分别被命名为 from 和 to，以示区分。&lt;/p&gt;
 &lt;p&gt;　　默认的，Edem : from : to = 8 : 1 : 1 ( 可以通过参数 –XX:SurvivorRatio 来设定 )，即： Eden = 8/10 的新生代空间大小，from = to = 1/10 的新生代空间大小。&lt;br&gt;JVM 每次只会使用 Eden 和其中的一块 Survivor 区域来为对象服务，所以无论什么时候，总是有一块 Survivor 区域是空闲着的。&lt;br&gt;因此，新生代实际可用的内存空间为 9/10 ( 即90% )的新生代空间。&lt;/p&gt;
-&lt;p&gt;#Gc&lt;br&gt;常见的垃圾回收算法有引用计数法（Reference Counting）、标注并清理（Mark and Sweep GC）、拷贝（Copying GC）和逐代回收（Generational GC）等算法，&lt;br&gt;关于这四种GC算法，详解请看此篇&lt;a href=&quot;http://www.cnblogs.com/killmyday/archive/2013/06/12/3132518.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;java内存垃圾回收算法&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;Gc&quot;&gt;&lt;a href=&quot;#Gc&quot; class=&quot;headerlink&quot; title=&quot;Gc&quot;&gt;&lt;/a&gt;Gc&lt;/h1&gt;&lt;p&gt;常见的垃圾回收算法有引用计数法（Reference Counting）、标注并清理（Mark and Sweep GC）、拷贝（Copying GC）和逐代回收（Generational GC）等算法，&lt;br&gt;关于这四种GC算法，详解请看此篇&lt;a href=&quot;http://www.cnblogs.com/killmyday/archive/2013/06/12/3132518.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;java内存垃圾回收算法&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;下文中 Minor GC 代表拷贝（Copying GC）算法 。Full GC 或者 Major GC代表 标记并清理算法（Mark and Sweep GC）&lt;/p&gt;
 &lt;p&gt;新生代几乎是所有 Java 对象出生的地方，即 Java 对象申请的内存以及存放都是在这个地方。Java 中的大部分对象通常不需长久存活，具有朝生夕灭的性质。&lt;/p&gt;
 &lt;p&gt;当一个对象被判定为 “死亡” 的时候，GC 就有责任来回收掉这部分对象的内存空间。新生代是 GC 收集垃圾的频繁区域。&lt;/p&gt;
@@ -66,9 +65,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;#java内存模型&lt;/p&gt;
-&lt;p&gt;##概述&lt;br&gt;  最近两天关注了java和Android的内存模型和垃圾回收机制，先整理如下。本篇文章是从很多篇文章中摘抄的，会在后面有个统一的转载地址的。&lt;/p&gt;
-&lt;p&gt;大家都知道Android应用层是由java开发的，Android的
+      &lt;h1 id=&quot;java内存模型&quot;&gt;&lt;a href=&quot;#java内存模型&quot; class=&quot;headerlink&quot; title=&quot;java内存模型&quot;&gt;&lt;/a&gt;java内存模型&lt;/h1&gt;&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; titl
     
     </summary>
     
